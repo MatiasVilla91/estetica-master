@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Generar una página web completa en…</title>
+</head>
+<body>
+<style>
+*{box-sizing:border-box}
+html,body{width:100%;margin:0;padding:0;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+
+/* Tipografía */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root{
+  --color-primary:#7F55B1;
+  --color-primary-soft:#9B7EBD;
+  --color-accent:#F49BAB;
+  --color-accent-soft:#FFE1E0;
+  --color-bg:#FFF9FB;
+  --color-text:#1D1027;
+  --color-text-soft:#4F3C67;
+  --radius-lg:18px;
+  --radius-pill:999px;
+  --shadow-soft:0 14px 40px rgba(0,0,0,0.08);
+  --shadow-subtle:0 6px 18px rgba(0,0,0,0.06);
+  --max-width:1140px;
+}
+
+body{
+  font-family:'Montserrat',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--color-bg);
+  color:var(--color-text);
+  line-height:1.6;
+  font-size:clamp(14px,3.6vw,16px);
+}
+
+/* Layout base */
+.page{
+  width:100%;
+}
+
+.section{
+  padding:56px 16px;
+}
+
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+}
+
+/* Tipografía escalable */
+h1,h2,h3,h4{
+  margin:0;
+  font-weight:700;
+  color:var(--color-text);
+}
+
+h1{
+  font-size:clamp(24px,5.2vw,40px);
+  letter-spacing:-0.02em;
+}
+
+h2{
+  font-size:clamp(20px,4.6vw,32px);
+  margin-bottom:8px;
+}
+
+h3{
+  font-size:18px;
+  font-weight:600;
+}
+
+.section-subtitle{
+  font-size:clamp(13px,3.3vw,15px);
+  color:var(--color-text-soft);
+  margin-bottom:24px;
+}
+
+/* Botones */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 22px;
+  min-height:44px;
+  border-radius:var(--radius-pill);
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  font-size:14px;
+  text-decoration:none;
+  transition:all .2s ease;
+  white-space:nowrap;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--color-primary),var(--color-accent));
+  color:#fff;
+  box-shadow:var(--shadow-soft);
+}
+
+.btn-primary:hover{
+  transform:translateY(-1px);
+  box-shadow:0 18px 45px rgba(127,85,177,0.45);
+}
+
+.btn-outline{
+  background:transparent;
+  color:var(--color-primary);
+  border:1px solid rgba(127,85,177,0.35);
+}
+
+.btn-outline:hover{
+  background:rgba(127,85,177,0.06);
+}
+
+/* Badges y chips */
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px;
+  border-radius:var(--radius-pill);
+  background:rgba(127,85,177,0.08);
+  color:var(--color-primary);
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+}
+
+/* HEADER STICKY */
+.header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(12px);
+  background:rgba(255,249,251,0.94);
+  border-bottom:1px solid rgba(155,126,189,0.16);
+}
+
+.header-inner{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.logo{
+  font-weight:700;
+  font-size:15px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--color-primary);
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.nav-link-inline{
+  display:none;
+  font-size:12px;
+  font-weight:500;
+  color:var(--color-text-soft);
+  text-decoration:none;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(255,225,224,0.55);
+}
+
+/* HERO */
+.hero{
+  padding-top:32px;
+  padding-bottom:56px;
+}
+
+.hero-inner{
+  max-width:var(--max-width);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:32px;
+}
+
+.hero-copy{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.hero-title-group{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.hero h1 span{
+  color:var(--color-primary);
+}
+
+.hero-subtitle{
+  font-size:clamp(14px,3.8vw,17px);
+  color:var(--color-text-soft);
+}
+
+.hero-highlights{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:4px;
+}
+
+.hero-highlight-chip{
+  font-size:11px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid rgba(244,155,171,0.4);
+  color:var(--color-text-soft);
+}
+
+.hero-cta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:6px;
+}
+
+.hero-note{
+  font-size:11px;
+  color:var(--color-text-soft);
+  margin-top:6px;
+}
+
+.hero-visual{
+  background:radial-gradient(circle at top,var(--color-accent-soft),#fff);
+  border-radius:24px;
+  padding:16px;
+  box-shadow:var(--shadow-soft);
+}
+
+.hero-image-frame{
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(127,85,177,0.16);
+  background:#fff;
+}
+
+/* PUNTOS DE DOLOR */
+.section-title-row{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin-bottom:24px;
+}
+
+.pills-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.tag-pill{
+  font-size:11px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(155,126,189,0.08);
+  color:var(--color-text-soft);
+}
+
+.dolor-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:12px;
+}
+
+.dolor-item{
+  display:flex;
+  gap:10px;
+  padding:12px 12px;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:var(--shadow-subtle);
+}
+
+.dolor-icon{
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:rgba(244,155,171,0.25);
+  border:1px solid rgba(244,155,171,0.6);
+}
+
+.dolor-text-title{
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:2px;
+}
+
+.dolor-text-body{
+  font-size:13px;
+  color:var(--color-text-soft);
+}
+
+/* SERVICIOS */
+.services{
+  background:linear-gradient(180deg,#fff,var(--color-accent-soft));
+}
+
+.services-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+  margin-top:20px;
+}
+
+.service-card{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:var(--shadow-soft);
+  transition:transform .18s ease,box-shadow .18s ease,translate .18s ease;
+  border:1px solid rgba(127,85,177,0.12);
+}
+
+.service-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(127,85,177,0.28);
+}
+
+.service-media{
+  position:relative;
+}
+
+.service-content{
+  padding:16px 16px 18px;
+}
+
+.service-label{
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  color:var(--color-primary-soft);
+  margin-bottom:4px;
+}
+
+.service-title{
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.service-desc{
+  font-size:13px;
+  color:var(--color-text-soft);
+  margin-bottom:10px;
+}
+
+.service-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:11px;
+  color:var(--color-text-soft);
+}
+
+/* PASOS */
+.steps{
+  background:#fff;
+}
+
+.steps-list{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-top:18px;
+}
+
+.step-item{
+  display:flex;
+  gap:12px;
+  padding:14px 14px;
+  border-radius:16px;
+  background:rgba(255,225,224,0.7);
+  border:1px solid rgba(244,155,171,0.5);
+}
+
+.step-number{
+  min-width:26px;
+  height:26px;
+  border-radius:999px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:700;
+  color:var(--color-primary);
+  box-shadow:0 6px 15px rgba(0,0,0,0.05);
+}
+
+.step-body-title{
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:2px;
+}
+
+.step-body-text{
+  font-size:13px;
+  color:var(--color-text-soft);
+}
+
+/* GALERÍA + PDFs */
+.gallery{
+  background:linear-gradient(180deg,var(--color-accent-soft),#fff);
+}
+
+.gallery-layout{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  margin-top:18px;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.gallery-item{
+  border-radius:16px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:var(--shadow-subtle);
+  border:1px solid rgba(127,85,177,0.12);
+}
+
+.gallery-caption{
+  padding:8px 10px;
+  font-size:11px;
+  color:var(--color-text-soft);
+}
+
+.pdf-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.pdf-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 12px;
+  border-radius:14px;
+  background:#fff;
+  border:1px solid rgba(155,126,189,0.25);
+  font-size:13px;
+}
+
+.pdf-name{
+  font-weight:500;
+}
+
+.pdf-link{
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  color:var(--color-primary);
+  text-decoration:none;
+}
+
+/* CTA FINAL FRASE + BOTÓN */
+.cta-final{
+  background:#fff;
+}
+
+.cta-box{
+  background:linear-gradient(135deg,var(--color-primary),var(--color-accent));
+  border-radius:24px;
+  padding:24px 20px;
+  color:#fff;
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.cta-title{
+  font-size:clamp(18px,4.5vw,24px);
+  font-weight:700;
+  letter-spacing:-0.01em;
+}
+
+.cta-text{
+  font-size:14px;
+  opacity:0.9;
+}
+
+.cta-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* FOOTER */
+.footer{
+  background:#FFFDFE;
+  border-top:1px solid rgba(155,126,189,0.2);
+  padding:24px 16px 28px;
+}
+
+.footer-inner{
+  max-width:var(--max-width);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  font-size:12px;
+  color:var(--color-text-soft);
+}
+
+.footer-brand{
+  font-weight:600;
+  color:var(--color-primary);
+}
+
+.footer-columns{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.footer-label{
+  font-weight:600;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+}
+
+.footer-meta{
+  font-size:11px;
+  color:rgba(79,60,103,0.8);
+}
+
+/* Desktop ≥768px */
+@media (min-width:768px){
+  .section{
+    padding:72px 24px;
+  }
+
+  .header-inner{
+    padding-inline:24px;
+  }
+
+  .hero-inner{
+    flex-direction:row;
+    align-items:center;
+    gap:36px;
+  }
+
+  .hero-copy,
+  .hero-visual{
+    flex:1;
+  }
+
+  .hero-visual{
+    padding:18px;
+  }
+
+  .services-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .gallery-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+  .gallery-layout{
+    flex-direction:row;
+  }
+
+  .gallery-layout-main{
+    flex:2;
+  }
+
+  .gallery-layout-side{
+    flex:1;
+  }
+
+  .footer-columns{
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:flex-start;
+  }
+}
+
+/* Desktop ancho ≥1024px */
+@media (min-width:1024px){
+  .section{
+    padding-inline:32px;
+  }
+
+  .header-inner{
+    padding-inline:32px;
+  }
+
+  .nav-link-inline{
+    display:inline-flex;
+  }
+
+  .hero-inner{
+    gap:52px;
+  }
+
+  .cta-box{
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .cta-text{
+    max-width:380px;
+  }
+}
+</style>
+
+<div class="page">
+
+  <!-- HEADER STICKY -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">Webs para esteticas</div>
+      <div class="header-right">
+       
+        <a href="#cta-final" class="btn btn-primary">Quiero mi sitio</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section id="hero" class="hero section">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="badge">Especialistas en webs para centros de estética</span>
+          <div class="hero-title-group">
+            <h1> <span>Creamos el sitio web de tu estética para que sea encontrada, recordada y elegida.</span></h1>
+            <p class="hero-subtitle">
+              Sitios web profesionales, optimizados para celulares y diseñados para convertir visitantes en clientes.
+            </p>
+          </div>
+
+        <!--  <div class="hero-highlights">
+            <span class="hero-highlight-chip">Diseños pensados para servicios de estética</span>
+            <span class="hero-highlight-chip">Optimizado para celulares</span>
+            <span class="hero-highlight-chip">Integración con agenda online</span>
+          </div>-->
+
+          <div class="hero-cta-row">
+            <a href="#cta-final" class="btn btn-primary">Quiero mi sitio</a>
+            <a href="#servicios" class="btn btn-outline">Ver cómo trabajamos</a>
+          </div>
+         <!-- <p class="hero-note">
+            Listo en pocas semanas, con textos e imágenes adaptadas a tu marca.
+          </p>-->
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-image-frame">
+            <img src="image.jpg" alt="Ejemplo de sitio web profesional para estética">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUNTOS DE DOLOR -->
+    <section id="dolores" class="section">
+      <div class="container">
+        <div class="section-title-row">
+          <h2>Tu talento es increíble, pero la invisibilidad digital está frenando tu crecimiento.
+            </h2>
+          <!--<p class="section-subtitle">
+            Sabemos que tu foco está en tus clientes, no en pelearte con la tecnología. Estos son los problemas que escuchamos todos los días.
+          </p>
+        </div>
+
+        <div class="pills-row">
+          <span class="tag-pill">Sin tiempo para redes</span>
+          <span class="tag-pill">Consultas por WhatsApp sin filtrar</span>
+          <span class="tag-pill">Agenda desordenada</span>
+        </div>-->
+
+        <div class="dolor-list">
+          <div class="dolor-item">
+            <div class="dolor-icon"></div>
+            <div>
+              <div class="dolor-text-title">No aparecés cuando los clientes te buscan en Google</div>
+              <p class="dolor-text-body">
+                Clientas listas para reservar terminan agendando en otro centro estético.
+              </p>
+            </div>
+          </div>
+
+          <div class="dolor-item">
+            <div class="dolor-icon"></div>
+            <div>
+              <div class="dolor-text-title">Tu marca online no refleja la escencia de tu trabajo</div>
+              <p class="dolor-text-body">
+                 Tu presencia digital no está alineada a quien sos.
+              </p>
+            </div>
+          </div>
+
+          <div class="dolor-item">
+            <div class="dolor-icon"></div>
+            <div>
+              <div class="dolor-text-title">Dependes solo de Instagram o Facebook para recibir consultas</div>
+              <p class="dolor-text-body">
+                Si no publics constantemente tus consultas bajan.  
+              </p>
+            </div>
+                    
+
+          </div>
+          <a href="#cta-final" class="btn btn-primary">Quiero mi sitio</a>
+          <a href="#cta-final" class="btn btn-outline">5 cosas para mejorar tu presencia online</a>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="services section">
+      <div class="container">
+        <div class="section-title-row">
+          <h2>El camino de invisible a elegida</h2>
+          <p class="section-subtitle">
+            Diseñamos webs específicas para estéticas, orientadas a conseguir más turnos, mostrar tus servicios con claridad y posicionar tu marca como referente.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-media">
+              <img src="image2.jpg" alt="Diseño de páginas web para centros de estética">
+            </div>
+            <div class="service-content">
+              <div class="service-label">Creación de webs</div>
+              <div class="service-title">Sitio web a medida para tu estética</div>
+              <p class="service-desc">
+                Página web moderna, adaptable a celulares, con secciones pensadas para mostrar tus tratamientos, antes y después, equipo y testimonios.
+              </p>
+              <div class="service-meta">
+                <span>Ideal para estéticas que quieren profesionalizarse</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-media">
+              <img src="image3.jpg" alt="Integración de agenda y turnos online para estética">
+            </div>
+            <div class="service-content">
+              <div class="service-label">Automatización</div>
+              <div class="service-title">Integración con agenda y turnos online</div>
+              <p class="service-desc">
+                Vinculamos tu web con herramientas de agenda para que recibas solicitudes de turnos organizadas, con los datos que necesitás desde el inicio.
+              </p>
+              <div class="service-meta">
+                <span>Más turnos confirmados</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-media">
+              <img src="image4b.jpg" alt="Branding y textos para páginas de estética">
+            </div>
+            <div class="service-content">
+              <div class="service-label">Contenido</div>
+              <div class="service-title">Textos y estructura pensados para vender</div>
+              <p class="service-desc">
+                Te ayudamos a ordenar tus servicios, nombrarlos correctamente y escribir textos claros que respondan todas las dudas antes de que pregunten.
+              </p>
+              <div class="service-meta">
+                <span>Copywriting adaptado a tu tono</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-media">
+              <img src="image5.jpg" alt="Soporte y mantenimiento para webs de estética">
+            </div>
+            <div class="service-content">
+              <div class="service-label">Mantenimiento</div>
+              <div class="service-title">Actualización y soporte continuo</div>
+              <p class="service-desc">
+                Actualización de servicios, precios e imágenes para que tu web siga siempre alineada con la realidad de tu estética.
+              </p>
+              <div class="service-meta">
+                <span>Planes flexibles según tu necesidad</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PASOS PARA LOGRAR RESULTADOS -->
+    <section id="pasos" class="steps section">
+      <div class="container">
+        <div class="section-title-row">
+          <h2>Plan Fin de la Invisibilidad</h2>
+                  </div>
+
+        <div class="steps-list">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div>
+              <div class="step-body-title">Ponete en contacto</div>
+              <p class="step-body-text">
+                Escribinos y coordinamos una llamada para entender tus objetivos y cómo podemos ayudarte.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div>
+              <div class="step-body-title">Contanos tu idea</div>
+              <p class="step-body-text">
+                Nos compartís tu estilo, servicios, referencias y todo lo que te gustaría transmitir.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div>
+              <div class="step-body-title">Materializamos tu sitio web</div>
+              <p class="step-body-text">
+                Diseñamos, maquetamos y ajustamos tu web hasta que te represente al 100 %. Te entregamos una página lista para mostrar y empezar a vender más.
+              </p>
+            </div>
+            
+          </div>
+          <a href="#cta-final" class="btn btn-primary">Quiero mi sitio</a>
+        </div>
+         
+      </div>
+      
+    </section>
+
+    <!-- GALERÍA + PDFs -->
+    <section id="galeria" class="gallery section">
+      <div class="container">
+        
+
+        <div class="gallery-layout">
+          <div class="gallery-layout-main">
+            <div class="gallery-grid">
+               <div class="service-media">
+              <img src="image6.jpg" alt="Integración de agenda y turnos online para estética">
+            </div>
+            <div class="service-content">
+              
+            
+
+          <div class="gallery-layout-side">
+            <h3 style="margin-bottom:8px;">Leonor</h3>
+            <p class="section-subtitle" style="margin-bottom:12px;">
+             "  Estoy chocha porque me costó mucho animarme a tener mi sitio web porque tampoco entendia como lo tenia que hacer o qué decir. Ahora puedo mostrarlo y que las personas me conozcan más y lo que quiero transmitir :)"
+            </p>
+
+            <!--<div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Checklist para tu web de estética</span>
+                <a href="#" class="pdf-link">Descargar PDF</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Guía para ordenar tus servicios</span>
+                <a href="#" class="pdf-link">Descargar PDF</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Ideas de textos para tratamientos</span>
+                <a href="#" class="pdf-link">Descargar PDF</a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FRASE + BOTÓN -->
+    <section id="cta-final" class="cta-final section">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <div class="cta-title">Dejá de pasar desapercibida: ganá la visibilidad que te merecés.</div>
+            <p class="cta-text">
+              Tu trabajo ya es profesional, tu web también debería serlo. Demos el próximo paso juntas y convertí a las visitas en turnos reservados.
+            </p>
+          </div>
+          <div class="cta-actions">
+            <a href="#hero" class="btn btn-primary">Conseguí tu web</a>
+            <p>Solo 3 cupos por mes</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">Web para esteticas</div>
+      <div class="footer-columns">
+        <div>
+          <div class="footer-label">Contacto</div>
+          <p>Escribinos para recibir una propuesta adaptada a tu estética.</p>
+          <p>Email: contacto@webparaesteticas.com</p>
+        </div>
+        <div>
+          <div class="footer-label">Información</div>
+          <p>Diseño y desarrollo de sitios web pensados exclusivamente para centros y profesionales de estética.</p>
+        </div>
+      </div>
+      <div class="footer-meta">
+        © <span>Web para esteticas</span> · Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
