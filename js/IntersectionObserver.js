@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     },
     {
-      threshold: 0.30
+      threshold: 0.15
     }
   );
 
